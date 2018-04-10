@@ -1,5 +1,6 @@
 package com.studios.juke.juke;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -21,12 +22,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.studios.juke.juke.UserAuth.AuthUiActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -120,9 +123,8 @@ public class InPartyFragment extends Fragment {
                     onSignedInInitialized(user.getDisplayName());
                 } else {
                     onSignedOutCleanup();
-                    startActivity(AuthUiActivity.createIntent(PartyActivity.this));
-                    finish();
-                    return;
+                    startActivity(AuthUiActivity.createIntent(InPartyFragment.this));
+                    getActivity().finish();
                 }
             }
         };
